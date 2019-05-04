@@ -15,6 +15,14 @@ class RegisterController extends Controller
 
     public function postRegister(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:posts|max:255',
+            'password' => 'required',
+            'password_confirmation' => 'required'
+        ]);
+
+
         $user = Sentinel::registerAndActivate($request->all());
         
 

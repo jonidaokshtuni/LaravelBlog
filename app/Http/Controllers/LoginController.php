@@ -14,6 +14,11 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
+        $validatedData = $request->validate([
+            'email' => 'required|unique:posts|max:255',
+            'password' => 'required',
+        ]);
+    
         Sentinel::authenticate($request->all());
         
         $slug = Sentinel::getUser()->roles()->first()->slug ;
