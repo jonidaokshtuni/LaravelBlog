@@ -41,3 +41,11 @@ Route::get('user/dashboard','UserController@profileEditing' )->middleware('users
 Route::get('admin/post', function () {
     return view('admin.post.post');
 });
+
+Route::get('admin/tag', function () {
+    return view('admin.tag.tag');
+});
+
+Route::get('admin/category', function () {
+    return view('admin.category.category');
+});
