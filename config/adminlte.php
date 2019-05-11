@@ -108,32 +108,7 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-       
-       
-        [
-           'text' => 'Posts',
-           'url'  => '#',
-        ],
-        [
-            'text'    => 'Categories',
-             'url'     => '#',
-                   
-        ],
-        [
-            'text' => 'Tags',
-            'url'  => '#',
-        ],
-        [
-            'text' => 'Users',
-            'url'  => '#',
-        ],
-       
+
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
@@ -145,6 +120,33 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
+        'MAIN NAVIGATION',
+        [
+            'text' => 'Blog',
+            'url'  => 'admin/blog',
+            'can'  => 'manage-blog',
+        ],
+       
+       
+        [
+           'text' => 'Posts',
+           'url'  => '/admin/post',
+        ],
+        [
+            'text'    => 'Categories',
+             'url'     => 'admin/category',
+                   
+        ],
+        [
+            'text' => 'Tags',
+            'url'  => 'admin/tag',
+        ],
+        [
+            'text' => 'Users',
+            'url'  => 'admin/user',
+        ],
+       
+        
     ],
     
 

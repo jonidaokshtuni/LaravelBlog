@@ -27,25 +27,20 @@ Route::group(['middleware'=>'visitors'], function(){
 
 Route::post('/logout', 'LoginController@logout');
 
-Route::get('post', function () {
-    return view('user.post');
-})->name('post');
-
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('admin/dashboard','AdminController@editing' )->middleware('admin');
-
+//user routes
+Route::get('post', 'UserPostController@index')->name('post');
 Route::get('user/dashboard','UserController@profileEditing' )->middleware('users');
 
-Route::get('admin/post', function () {
-    return view('admin.post.post');
-});
+//admin routes
+Route::get('admin/dashboard','AdminController@editing' )->middleware('admin');
 
-Route::get('admin/tag', function () {
-    return view('admin.tag.tag');
-});
+Route::resource('admin/user','CreatingUsersController');
 
-Route::get('admin/category', function () {
-    return view('admin.category.category');
-});
+//post routes
+Route::resource('admin/post', 'PostController');
+
+//tag routes
+Route::resource('admin/tag', 'TagController');
+
+//category routes
+Route::resource('admin/category', 'CategoryController');

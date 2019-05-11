@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function postLogin(Request $request)
     {
         $validatedData = $request->validate([
-            'email' => 'required|unique:posts|max:255',
+            'email' => 'required',
             'password' => 'required',
         ]);
     
