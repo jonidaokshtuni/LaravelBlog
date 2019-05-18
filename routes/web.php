@@ -38,9 +38,13 @@ Route::resource('admin/user','CreatingUsersController');
 
 //post routes
 Route::resource('admin/post', 'PostController');
+Route::get('admin/post/get_datatable','PostController@get_datatable')->name('post.get_datatable');
+
 
 //tag routes
 Route::resource('admin/tag', 'TagController');
+Route::get('admin/tag/get_datatable','TagController@get_datatable')->name('tag.get_datatable');
 
 //category routes
 Route::resource('admin/category', 'CategoryController');
+Route::get('admin/category/get_datatable','CategoryController@get_datatable')->name('category.get_datatable');

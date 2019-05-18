@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use App\Post;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Validator;
+use URL;
+use Yajra\Datatables\Facades\Datatables;
 
 class PostController extends Controller
 {
@@ -13,7 +20,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view ('admin.post.show');
+        $posts = Post::all();
+        return view ('admin.post.show', compact('posts'));
+    }
+    public function get_datatable()
+    {
+        return Datatables::of(Post::get())->make(true);
     }
 
     /**
@@ -34,7 +46,31 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'subtitle'=>'required',
+            'slug' => 'required',
+            'body' => 'required',
+            'image'=> 'required'
+        ]);
+        $post = new Post;
+        $post->user_id = Sentinel::getUser()->id;
+        $post->title = $request->input('title');
+        $post->subtitle = $request->input('subtitle');
+        $post->slug = $request->input('slug');
+        $post->body = $request->input('body');
+        
+        if(Input::hasFile('image'))
+        {
+          $file = Input::file('image');
+          $file->move(public_path(). '/posts/',
+          $file->getClientOriginalName());
+          $url = URL::to("/") . '/posts/' . $file->getClientOriginalName();
+        }
+        $post->image = $url;
+        $post->save();
+        return redirect(route('post.index'))->
+        with('response','Post created successfully');
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use Yajra\Datatables\Facades\Datatables;
 
 class CategoryController extends Controller
 {
@@ -12,10 +14,14 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view ('admin.category.show');
+    {   
+        $categories = Category::all();
+        return view ('admin.category.show', compact('categories'));
     }
-
+    public function get_datatable()
+    {
+        return Datatables::of(Category::get())->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +40,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories',
+            'slug' => 'required',
+        ]);
+        $category = new Category;
+        $category->name = $request->input('name');
+        $category->slug = $request->input('slug');
+        $category->save();
+        return redirect(route('category.index'))->
+        with('response','Category created successfully');
     }
 
     /**

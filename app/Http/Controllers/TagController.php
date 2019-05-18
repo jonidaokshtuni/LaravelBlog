@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
+use Yajra\Datatables\Facades\Datatables;
 
 class TagController extends Controller
 {
@@ -13,9 +15,14 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view ('admin.tag.show');
+        $tags = Tag::all();
+        return view ('admin.tag.show', compact('tags'));
     }
 
+    public function get_datatable()
+    {
+        return Datatables::of(Tag::get())->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +41,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:tags',
+            'slug' => 'required',
+        ]);
+        $tag = new Tag;
+        $tag->name = $request->input('name');
+        $tag->slug = $request->input('slug');
+        $tag->save();
+        return redirect(route('tag.index'))->
+        with('response','Tag created successfully');
     }
 
     /**
