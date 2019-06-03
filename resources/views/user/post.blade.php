@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-        <small>Created at {{ $post->created_at}} </small><br>
+        <small>Created at {{ $post->created_at->diffForHumans()}} </small><br>
         <small>Created by {{ $post->user_id}} </small><br>
         @foreach ($post->categories as $category)
             <small>Categories : {{$category->name}} </small>

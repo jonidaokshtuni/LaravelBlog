@@ -19,16 +19,19 @@
                 {{ $post->subtitle}} 
             </h3>
           </a>
-          <p class="post-meta">Posted by
-            <a href="#">Start Bootstrap</a>
-          {{$post->created_at }}</p>
+          <p class="post-meta">Posted by {{$post->user_id}}
+          <br/>
+          {{$post->created_at->diffForHumans() }}</p>
         </div>
         @endforeach
         <hr>
         <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-        </div>
+        <ul class="pager">
+          
+            {{ $posts->links() }}
+
+  
+        </ul>
       </div>
     </div>
   </div>
