@@ -15,13 +15,12 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
-        return view ('admin.tag.show', compact('tags'));
+        return view ('admin.tag.show');
     }
 
     public function get_datatable()
     {
-        return Datatables::of(Tag::get())->make(true);
+        return Datatables::eloquent(Tag::query())->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -72,7 +71,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::where('id',$id)->first();
+        return view('admin.tag.edit',compact('tag'));
     }
 
     /**
@@ -84,7 +84,16 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:tags',
+            'slug' => 'required',
+        ]);
+        $tag = Tag::find($id);
+        $tag->name = $request->input('name');
+        $tag->slug = $request->input('slug');
+        $tag->save();
+        return redirect(route('tag.index'))->
+        with('response','Tag updated successfully');
     }
 
     /**
@@ -95,6 +104,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tag::where('id',$id)->delete();
+        return redirect()->back();
     }
 }

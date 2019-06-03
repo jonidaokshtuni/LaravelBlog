@@ -1,5 +1,7 @@
 @extends('adminlte::page')
-
+@section('content_header')
+<a class = 'col-lg-offset-5 btn btn-success'  href="{{ route('post.create')}}"> Add New Post</a>
+@stop
 @section('content')
 <table id="posts-table"  class="table">
     <thead>
@@ -16,20 +18,6 @@
                 <td>Updated_at</td>
         </tr>
     </thead>
-    @foreach($posts as $post)
-    <tr>
-        <td>{{ $post->id }}</td>
-        <td>{{ $post->user_id }}</td>
-        <td>{{ $post->title }}</td>
-        <td>{{ $post->subtitle }}</td>
-        <td>{{ $post->slug }}</td>
-        <td>{{ $post->body}}</td>
-        <td>{{ $post->status}}</td>
-        <td>{{ $post->image }}</td>
-        <td>{{$post->created_at}}</td>
-        <td>{{$post->updated_at}}</td>
-    </tr>
-    @endforeach
 </table>
 @endsection
 

@@ -1,5 +1,7 @@
 @extends('adminlte::page')
-
+@section('content_header')
+<a class = 'col-lg-offset-5 btn btn-success'  href="{{ route('category.create')}}"> Add New Category</a>
+@stop
 @section('content')
 <table id="categories-table"  class="table">
     <thead>
@@ -11,15 +13,6 @@
             <td>Updated_at</td>
         </tr>
     </thead>
-        @foreach($categories as $category)
-        <tr>
-            <td>{{ $category->id }}</td>
-            <td>{{ $category->name }}</td>
-            <td>{{ $category->slug }}</td>
-            <td>{{$category->created_at}}</td>
-            <td>{{$category->updated_at}}</td>
-        </tr>
-        @endforeach
 </table>
 @endsection
 

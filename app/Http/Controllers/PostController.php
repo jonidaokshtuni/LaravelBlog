@@ -70,7 +70,7 @@ class PostController extends Controller
         $post->image = $url;
         $post->save();
         return redirect(route('post.index'))->
-        with('response','Post created successfully');
+        with('success','Post created successfully');
     }
 
     /**
@@ -92,7 +92,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::where('id',$id)->first();
+        return view('admin.post.edit',compact('post'));
     }
 
     /**
@@ -104,7 +105,31 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'subtitle'=>'required',
+            'slug' => 'required',
+            'body' => 'required',
+            'image'=> 'required'
+        ]);
+        $post = Post::find($id);
+        $post->user_id = Sentinel::getUser()->id;
+        $post->title = $request->input('title');
+        $post->subtitle = $request->input('subtitle');
+        $post->slug = $request->input('slug');
+        $post->body = $request->input('body');
+        
+        if(Input::hasFile('image'))
+        {
+          $file = Input::file('image');
+          $file->move(public_path(). '/posts/',
+          $file->getClientOriginalName());
+          $url = URL::to("/") . '/posts/' . $file->getClientOriginalName();
+        }
+        $post->image = $url;
+        $post->save();
+
+        return redirect(route('post.index'));
     }
 
     /**
@@ -115,6 +140,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::where('id',$id)->delete();
+        return redirect()->back();
     }
 }
