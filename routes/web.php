@@ -12,8 +12,6 @@
 */
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('post/{post}','UserPostController@index')->name('post');
-
 Route::group(['middleware'=>'visitors'], function(){
     Route::get('/register', 'RegisterController@register');
     Route::post('/register', 'RegisterController@postRegister');
@@ -27,7 +25,7 @@ Route::group(['middleware'=>'visitors'], function(){
 Route::post('/logout', 'LoginController@logout');
 
 //user routes
-Route::get('post', 'UserPostController@index')->name('post');
+Route::get('post/{post}','UserPostController@index')->name('post');
 Route::get('user/dashboard','UserController@profileEditing' )->middleware('users');
 
 //admin routes

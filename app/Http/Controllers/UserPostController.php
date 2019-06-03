@@ -10,4 +10,9 @@ class UserPostController extends Controller
     {
         return view('user.post',compact('post'));
     }
+
+    public function show($id)
+    {
+        
+    }
 }
