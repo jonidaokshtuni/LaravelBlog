@@ -26,7 +26,9 @@ Route::post('/logout', 'LoginController@logout');
 
 //user routes
 Route::get('post/{post}','UserPostController@index')->name('post');
+Route::post('/like','PostController@likePost')->name('like');
 Route::get('user/dashboard','UserController@profileEditing' )->middleware('users');
+
 
 //admin routes
 Route::get('admin/dashboard','AdminController@editing' )->middleware('admin');
@@ -35,7 +37,7 @@ Route::resource('admin/user','CreatingUsersController');
 
 //post routes
 Route::resource('admin/post', 'PostController');
-Route::get('admin/post/get_datatable','PostController@get_datatable')->name('post.get_datatable');
+Route::get('admin/post/getDatatable','PostController@getDatatable')->name('post.getDatatable');
 
 
 //tag routes

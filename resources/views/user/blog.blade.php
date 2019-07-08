@@ -19,9 +19,16 @@
                 {{ $post->subtitle}} 
             </h3>
           </a>
-          <p class="post-meta">Posted by {{$post->user_id}}
+          <p class="post-meta">Posted by {{$post->user->first_name}}
           <br/>
           {{$post->created_at->diffForHumans() }}</p>
+          @if(Sentinel::check())
+          <div class="interaction">
+            <a href="#" class=" like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
+            <a href="#" class=" like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You dont like this post' : 'Dislike' : 'Dislike'  }}</a>
+         </div>
+         @endif
+          <hr>
         </div>
         @endforeach
         <hr>
@@ -37,5 +44,12 @@
   </div>
 
   <hr>
-
+  @section('js')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="{{ asset('js/like.js') }}"></script>
+  <script>
+    var token = '{{ Session::token() }}';
+    var urlLike = '{{ route('like') }}';
+  </script>
+@stop
 @endsection

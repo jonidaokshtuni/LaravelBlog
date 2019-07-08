@@ -167,7 +167,7 @@ return [
          */
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,7 +230,7 @@ return [
         'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
         'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
         'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
-        'DataTables' => Yajra\DataTables\Facades\DataTables::class, 
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class, 
 
     ],
 

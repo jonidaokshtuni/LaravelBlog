@@ -2,11 +2,15 @@
 @section('content_header')
 <a class = 'col-lg-offset-5 btn btn-success'  href="{{ route('post.create')}}"> Add New Post</a>
 @stop
+@section('css')
+    <link type="text/css" href="./resources/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/assets/css/jquery.dataTables.min.css">
+@stop
 @section('content')
-<table id="posts-table"  class="table">
+<table id="posts"  class="table">
     <thead>
         <tr>
-                <td>Post Id</td>
+                <td> Id</td>
                 <td>User_id</td>
                 <td>Title</td>
                 <td>Subtitle</td>
@@ -23,16 +27,15 @@
 
 
 @section('js')
-<script src="https://datatables.yajrabox.com/js/jquery.min.js"></script>
-<script src="https://datatables.yajrabox.com/js/bootstrap.min.js"></script>
-<script src="https://datatables.yajrabox.com/js/jquery.dataTables.min.js"></script>
-<script src="https://datatables.yajrabox.com/js/datatables.bootstrap.js"></script>
+<script src="{{ asset('/js/jquery.dataTables.min.js')}}"></script>
 <script type="text/javascript">
-     $(function() {
-        $('#posts-table').DataTable({
+$(document).ready(function() {
+        $('#posts').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{route('post.get_datatable')}}",
+            ajax: {
+             "url": "{!! route("post.getDatatable") !!}",
+              },
             columns: [
                 {data:'id', name:'id'},
                 {data:'user_id', name:'user_id'},

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Model\user;
+namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
-class User extends Authenticatable
+
+class User extends \Cartalyst\Sentinel\Users\EloquentUser
 {
     use Notifiable;
 
@@ -36,4 +36,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function likes()
+    {
+       return $this->hasMany('App\Like');
+    }
+    public function post(){
+        return $this->hasMany('App\Post');
+      
+}
 }

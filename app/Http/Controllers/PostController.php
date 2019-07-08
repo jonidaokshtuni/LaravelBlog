@@ -23,7 +23,7 @@ class PostController extends Controller
         $posts = Post::all();
         return view ('admin.post.show', compact('posts'));
     }
-    public function get_datatable()
+    public function getdatatable()
     {
         return Datatables::of(Post::get())->make(true);
     }
