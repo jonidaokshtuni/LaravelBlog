@@ -15,13 +15,25 @@ class TagController extends Controller
      */
     public function index()
     {
+        if(request()->ajax())
+        {
+            return datatables()->of(Tag::latest()->get())
+                    ->addColumn('action',function($tag){
+                        $button = '<a href="'. route('tag.edit', $tag->id) .'" type="button"
+                        name="edit" 
+                        class="edit btn btn-primary btn-sm">Edit</a>';
+                        $button .= '&nbsp;';
+                        $button .='<a href="'. route('tag.destroy', $tag->id) .'" type="button"
+                           name="delete" 
+                           class="delete btn btn-primary btn-sm">Delete</button>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         return view ('admin.tag.show');
     }
 
-    public function get_datatable()
-    {
-        return Datatables::eloquent(Tag::query())->make(true);
-    }
     /**
      * Show the form for creating a new resource.
      *

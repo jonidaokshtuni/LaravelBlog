@@ -20,13 +20,29 @@ class PostController extends Controller
      */
     public function index()
     {
+        if(request()->ajax())
+        {
+            return datatables()->of(Post::latest()->get())
+                    ->addColumn('action',function($post){
+                        $button = '<a type="button" href="'. route('post.edit', $post->id) .'"
+                        name="edit" 
+                        class="edit btn btn-primary btn-sm">Edit</a>';
+                        $button .= '&nbsp;';
+                        $button .='<a type="button"
+                           name="delete" href="'. route('post.destroy', $post->id) .'"
+                           class="delete btn btn-primary btn-sm">Delete</a>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
         $posts = Post::all();
         return view ('admin.post.show', compact('posts'));
     }
-    public function getdatatable()
-    {
-        return Datatables::of(Post::get())->make(true);
-    }
+    //public function getdatatable()
+    //{
+    //    return Datatables::of(Post::get())->make(true);
+    //}
 
     /**
      * Show the form for creating a new resource.

@@ -15,13 +15,28 @@ class CategoryController extends Controller
      */
     public function index()
     {   
-        $categories = Category::all();
-        return view ('admin.category.show', compact('categories'));
+        if(request()->ajax())
+        {
+            return datatables()->of(Category::latest()->get())
+                    ->addColumn('action',function($category){
+                        $button = '<a type="button"
+                        name="edit"  href="'. route('category.edit', $category->id) .'"
+                        class="edit btn btn-primary btn-sm">Edit</a>';
+                        $button .= '&nbsp;';
+                        $button .='<a type="button"
+                           name="delete"  href="'. route('category.destroy', $category->id) .'"
+                           class="delete btn btn-primary btn-sm">Delete</a>';
+                        return $button;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        return view ('admin.category.show');
     }
-    public function get_datatable()
-    {
-        return Datatables::of(Category::get())->make(true);
-    }
+   // public function get_datatable()
+   // {
+   //     return Datatables::of(Category::get())->make(true);
+   // }
     /**
      * Show the form for creating a new resource.
      *
