@@ -10,4 +10,13 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Post');
     }
+    //Accessors
+    public function getNameAttribute($value){
+        return ucwords($value);
+    }
+
+      //Mutators
+  public function setSlugAttribute($value){
+    $this->attributes['slug'] = strtolower($value);
+}
 }

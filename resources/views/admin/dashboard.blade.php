@@ -8,7 +8,7 @@
 
 @section('content')
  @if(Sentinel::check())
-<p>Hello {{Sentinel::getUSer()->first_name}}</p>
+<p>Hello {{Sentinel::getUSer()->name}}</p>
 @else
     Test
 @endif

@@ -45,4 +45,16 @@ class User extends \Cartalyst\Sentinel\Users\EloquentUser
         return $this->hasMany('App\Post');
       
 }
+ //Accessors
+ public function getNameAttribute($value){
+    return ucwords($value);
+}
+public function getEmailAttribute($value){
+    return strtolower($value);
+}
+
+  //Mutators
+  public function setNameAttribute($value){
+       $this->attributes['name'] = ucwords($value);
+  }
 }
