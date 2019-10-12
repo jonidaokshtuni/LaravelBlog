@@ -26,6 +26,7 @@ Route::post('/logout', 'LoginController@logout');
 
 //user routes
 Route::get('post/{post}','UserPostController@index')->name('post');
+Route::get('/user/posts', 'UserPostController@showPosts')->name('posts');
 Route::post('/like','PostController@likePost')->name('like');
 Route::get('user/dashboard','UserController@profileEditing' )->middleware('users');
 

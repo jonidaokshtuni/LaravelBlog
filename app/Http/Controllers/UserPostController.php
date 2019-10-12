@@ -14,6 +14,12 @@ class UserPostController extends Controller
         return view('user.post',compact('post'));
     }
 
+    public function showPosts()
+    {
+        $posts = Post::all();
+        return view ('user.posts', compact('posts'));
+    }
+
     public function show($id)
     {
         

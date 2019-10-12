@@ -12,6 +12,10 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route ('home') }}">Home</a>
           </li>
+
+          <li class="nav-item">
+          <a class="nav-link" href="{{ route ('posts') }}">All posts ({{$postsCount->count()}})</a>
+            </li>
         @if(Sentinel::check())
           <li class="nav-item" role="presentation">
               <form action="/logout"  method="POST" id="logout-form">
