@@ -179,6 +179,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        App\Providers\ObserverServiceProvider::class,
 
     ],
 
