@@ -7,6 +7,7 @@ use Illuminate\Auth\Authenticatable;
 use Cartalyst\Sentinel\Users\EloquentUser;
 use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class User extends EloquentUser implements AuthenticatableUserContract, AuthenticatableContract
@@ -74,4 +75,11 @@ public function getEmailAttribute($value){
   {
       return [];
   }
+  //global scope
+   public static function boot(){
+       parent::boot();
+       static::addGlobalScope('created_at', function(Builder $builder){
+           return $builder->where('created_at', '<>', null);
+       });
+   }
 }

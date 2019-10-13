@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -34,7 +35,24 @@ class Post extends Model
     }
 
       //Mutators
-  public function setSlugAttribute($value){
+    public function setSlugAttribute($value){
     $this->attributes['slug'] = strtolower($value);
-}
+    }
+    //global scope
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new ActiveScope);
+    }
+    //local scope
+    public function scopePublished($query)
+    {
+        return $query->where('publish_date','<',\Carbon\Carbon::now());
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
 }
