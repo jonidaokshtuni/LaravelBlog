@@ -3,12 +3,15 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Auth\Authenticatable;
+use Cartalyst\Sentinel\Users\EloquentUser;
+use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 
-class User extends \Cartalyst\Sentinel\Users\EloquentUser
+class User extends EloquentUser implements AuthenticatableUserContract, AuthenticatableContract
 {
-    use Notifiable;
+    use Notifiable, Authenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -56,5 +59,19 @@ public function getEmailAttribute($value){
   //Mutators
   public function setNameAttribute($value){
        $this->attributes['name'] = ucwords($value);
+  }
+
+  public function getJWTIdentifier()
+  {
+      return $this->getKey();
+  }
+  /**
+   * Return a key value array, containing any custom claims to be added to the JWT.
+   *
+   * @return array
+   */
+  public function getJWTCustomClaims()
+  {
+      return [];
   }
 }

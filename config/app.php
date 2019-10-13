@@ -180,6 +180,7 @@ return [
         App\Providers\ViewServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         App\Providers\ObserverServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 
