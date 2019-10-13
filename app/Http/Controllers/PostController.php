@@ -65,7 +65,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
             'subtitle'=>'required',
-            'slug' => 'required',
+            //'slug' => 'required',
             'body' => 'required',
             'image'=> 'required'
         ]);
@@ -73,7 +73,7 @@ class PostController extends Controller
         $post->user_id = Sentinel::getUser()->id;
         $post->title = $request->input('title');
         $post->subtitle = $request->input('subtitle');
-        $post->slug = $request->input('slug');
+       // $post->slug = $request->input('slug');
         $post->body = $request->input('body');
         
         if(Input::hasFile('image'))
