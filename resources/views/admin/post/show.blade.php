@@ -14,6 +14,7 @@
                 <th>Subtitle</th>
                 <th>Slug</th>
                 <th>Body</th>
+                <th>Publish Date </th>
                 <th>Status</th>
                 <th>Image</th>
                 <th>Created_at</th>
@@ -45,6 +46,7 @@ $(document).ready(function() {
                 {data:'subtitle', name:'subtitle'},
                 {data:'slug', name:'slug'},
                 {data:'body', name:'body'},
+                {data:'publish_date', name:'publish_date'},
                 {data:'status', name:'status'},
                 {data:'image', name:'image'},
                 {data:'created_at', name:'created_at'},

@@ -20,6 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('subtitle',256);
             $table->string('slug',100);
             $table->text('body');
+            $table->date('publish_date');
             $table->boolean('status');
             $table->string('image');
             $table->timestamps();

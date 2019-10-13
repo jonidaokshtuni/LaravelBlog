@@ -41,7 +41,11 @@
         @error('image')
           <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-       <div class="checkbox">
+        <div class="form-group"> 
+          <label class="control-label" for="publish_date">Publish Date</label>
+          <input class="form-control" id="publish_date" name="publish_date" placeholder="YYYY/MM/DD" type="text"/>
+        </div>
+        <div class="checkbox">
          <label>
            <input type="checkbox" name="status"> Publish
          </label>
@@ -66,3 +70,4 @@
   </html>
   @endsection
 
+  

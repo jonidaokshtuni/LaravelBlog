@@ -84,6 +84,7 @@ class PostController extends Controller
           $url = URL::to("/") . '/posts/' . $file->getClientOriginalName();
         }
         $post->image = $url;
+        $post->publish_date=$request->input('publish_date');
         $post->save();
         return redirect(route('post.index'))->
         with('success','Post created successfully');
@@ -126,7 +127,8 @@ class PostController extends Controller
             'subtitle'=>'required',
             'slug' => 'required',
             'body' => 'required',
-            'image'=> 'required'
+            'image'=> 'required',
+            
         ]);
         $post = Post::find($id);
         $post->user_id = Sentinel::getUser()->id;
@@ -143,6 +145,7 @@ class PostController extends Controller
           $url = URL::to("/") . '/posts/' . $file->getClientOriginalName();
         }
         $post->image = $url;
+        $post->publish_date=$request->input('publish_date');
         $post->save();
 
         return redirect(route('post.index'));
