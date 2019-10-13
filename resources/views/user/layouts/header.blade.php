@@ -6,6 +6,11 @@
         Menu
         <i class="fas fa-bars"></i>
       </button>
+      @isHome
+     <p>on home</p>
+      @else
+     <p> not home</p>
+      @endisHome
       <div class="collapse navbar-collapse" id="navbarResponsive">
        
         <ul class="navbar-nav ml-auto">
