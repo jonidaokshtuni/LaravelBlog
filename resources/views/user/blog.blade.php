@@ -24,11 +24,13 @@
           <br/>
           {{$post->created_at->diffForHumans() }}</p>
         
+          @if(Sentinel::check())
           <div class="interaction">
-            <a href="#" class="like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
-            <a href="#" class="like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You dont like this post' : 'Dislike' : 'Dislike'  }}</a>
+            <a href="#" class=" like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this post' : 'Like' : 'Like'  }}</a> |
+            <a href="#" class=" like">{{ Sentinel::getUser()->likes()->where('post_id', $post->id)->first() ? Sentinel::getUser()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You dont like this post' : 'Dislike' : 'Dislike'  }}</a>
          </div>
-       
+         @endif
+
           <hr>
         </div>
         @endforeach

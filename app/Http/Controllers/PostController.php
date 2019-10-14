@@ -10,6 +10,7 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Validator;
 use URL;
 use Yajra\Datatables\Facades\Datatables;
+use App\Events\PostCreated;
 
 class PostController extends Controller
 {
@@ -86,6 +87,9 @@ class PostController extends Controller
         $post->image = $url;
         $post->publish_date=$request->input('publish_date');
         $post->save();
+
+        event(new PostCreated($post));
+
         return redirect(route('post.index'))->
         with('success','Post created successfully');
     }
