@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+       
     @include('user/layouts/head')
   
 </head>
@@ -12,9 +12,10 @@
 
  @include('user/layouts/header')
 
-        @section('main-content')
-            @show 
-        
+@section('main-content')
+ @show 
+ @section('js')
+ @show
   @include('user/layouts/footer')
 
 </body>
