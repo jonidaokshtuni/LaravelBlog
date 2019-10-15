@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('send', 'HomeController@sendNotification');
 Route::get('/plans', 'PlanController@index')->name('plans.index');
 Route::get('/plan/{plan}', 'PlanController@show')->name('plans.show');
 Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
