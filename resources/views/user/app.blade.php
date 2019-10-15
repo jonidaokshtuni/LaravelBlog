@@ -15,7 +15,9 @@
 @section('main-content')
  @show 
  @section('js')
+ <script src="https://js.stripe.com/v3/"></script>
  @show
+ @yield('scripts')
   @include('user/layouts/footer')
 
 </body>

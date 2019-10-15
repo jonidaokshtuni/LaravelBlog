@@ -8,11 +8,12 @@ use Cartalyst\Sentinel\Users\EloquentUser;
 use Tymon\JWTAuth\Contracts\JWTSubject as AuthenticatableUserContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Cashier\Billable;
 
 
 class User extends EloquentUser implements AuthenticatableUserContract, AuthenticatableContract
 {
-    use Notifiable, Authenticatable;
+    use Notifiable, Authenticatable, Billable;
 
     /**
      * The attributes that are mass assignable.

@@ -11,6 +11,9 @@
 |
 */
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/plans', 'PlanController@index')->name('plans.index');
+Route::get('/plan/{plan}', 'PlanController@show')->name('plans.show');
+Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
 
 Route::group(['middleware'=>'visitors'], function(){
     Route::get('/register', 'RegisterController@register');
