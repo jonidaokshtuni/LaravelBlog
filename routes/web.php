@@ -50,3 +50,4 @@ Route::resource('admin/tag', 'TagController');
 Route::resource('admin/category', 'CategoryController');
 //Route::get('admin/category/get_datatable','CategoryController@get_datatable')->name('category.get_datatable');
 
+Route::get('email', 'EmailController@sendEmail');
